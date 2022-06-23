@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 app.post( '/ctbot',  async (req, res) => {
     // console.log(req.body);
     runSample(req.body.userquery).then( data => {
-        res.send({Rpely: data});
+        res.send({Reply: data});
     });
 
 });
@@ -54,10 +54,16 @@ async function runSample(userquery, projectId = 'ct-i-intent-suux') {
 
   // Send request and log result
   const responses = await sessionClient.detectIntent(request);
-  console.log('Detected intent');
+
   const result = responses[0].queryResult;
+
   console.log(`  Query: ${result.queryText}`);
-  console.log(`  Response: ${result.fulfillmentText}`);
+
+  console.log(result);
+
+  //console.log(`  Response: ${result.fulfillmentText}`);
+
+
   if (result.intent) {
     console.log(`  Intent: ${result.intent.displayName}`);
   } else {
@@ -73,3 +79,94 @@ const PORT = 11000;
 app.listen(PORT, ()=>{
     console.log(`server is running on ${PORT}`)
 })
+
+// {
+//   fulfillmentMessages: [
+//     {
+//       platform: 'PLATFORM_UNSPECIFIED',
+//       text: [Object],
+//       message: 'text'
+//     }
+//   ],
+//   outputContexts: [],
+//   queryText: 'celebal students programs',
+//   speechRecognitionConfidence: 0,
+//   action: '',
+//   parameters: { fields: {} },
+//   allRequiredParamsPresent: true,
+//   fulfillmentText: 'ok',
+//   webhookSource: '',
+//   webhookPayload: null,
+//   intent: {
+//     inputContextNames: [],
+//     events: [],
+//     trainingPhrases: [],
+//     outputContexts: [],
+//     parameters: [],
+//     messages: [],
+//     defaultResponsePlatforms: [],
+//     followupIntentInfo: [],
+//     name: 'projects/ct-i-intent-suux/agent/intents/a63e0b3a-24cd-492a-9d77-0681a251e786',
+//     displayName: 'Different type of responses test',
+//     priority: 0,
+//     isFallback: false,
+//     webhookState: 'WEBHOOK_STATE_UNSPECIFIED',
+//     action: '',
+//     resetContexts: false,
+//     rootFollowupIntentName: '',
+//     parentFollowupIntentName: '',
+//     mlDisabled: false
+//   },
+//   intentDetectionConfidence: 1,
+//   diagnosticInfo: null,
+//   languageCode: 'en',
+//   sentimentAnalysisResult: null
+// }
+
+// {
+//   fulfillmentMessages: [
+//     {
+//       platform: 'FACEBOOK',
+//       quickReplies: [Object],
+//       message: 'quickReplies'
+//     },
+//     {
+//       platform: 'PLATFORM_UNSPECIFIED',
+//       text: [Object],
+//       message: 'text'
+//     }
+//   ],
+//   outputContexts: [],
+//   queryText: 'celebal students programs',
+//   speechRecognitionConfidence: 0,
+//   action: '',
+//   parameters: { fields: {} },
+//   allRequiredParamsPresent: true,
+//   fulfillmentText: 'ok',
+//   webhookSource: '',
+//   webhookPayload: null,
+//   intent: {
+//     inputContextNames: [],
+//     events: [],
+//     trainingPhrases: [],
+//     outputContexts: [],
+//     parameters: [],
+//     messages: [],
+//     defaultResponsePlatforms: [],
+//     followupIntentInfo: [],
+//     name: 'projects/ct-i-intent-suux/agent/intents/a63e0b3a-24cd-492a-9d77-0681a251e786',
+//     displayName: 'Different type of responses test',
+//     priority: 0,
+//     isFallback: false,
+//     webhookState: 'WEBHOOK_STATE_UNSPECIFIED',
+//     action: '',
+//     resetContexts: false,
+//     rootFollowupIntentName: '',
+//     parentFollowupIntentName: '',
+//     mlDisabled: false
+//   },
+//   intentDetectionConfidence: 1,
+//   diagnosticInfo: null,
+//   languageCode: 'en',
+//   sentimentAnalysisResult: null
+// }
